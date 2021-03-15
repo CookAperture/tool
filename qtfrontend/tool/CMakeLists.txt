@@ -29,9 +29,11 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
-        qml.qrc
-        qmlmainadapter.h
-        qmlmainadapter.cpp
+        qml/qml.qrc
+        adapter/qmlmainadapter.h
+        adapter/qmlmainadapter.cpp
+        adapter/qmlprototypeadapter.h
+        adapter/qmlprototypeadapter.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -54,3 +56,8 @@ target_compile_definitions(tool
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(tool
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+
+# orgamize code here
+source_group("main" FILES main.cpp)
+source_group("adapter" FILES adapter/qmlmainadapter.h adapter/qmlmainadapter.cpp)
+source_group("adapter\\subadapter" FILES adapter/qmlprototypeadapter.h adapter/qmlprototypeadapter.cpp)
