@@ -5,5 +5,7 @@
         <file>ui/prototype.qml</file>
         <file>ui/Page1Form.ui.qml</file>
         <file>ui/Page2Form.ui.qml</file>
+        <file>BasicToolBar.qml</file>
+        <file>SideBar.qml</file>
     </qresource>
 </RCC>
