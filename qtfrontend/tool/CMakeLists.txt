@@ -41,8 +41,8 @@ set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe
 set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
 #----------------------------------
 
-list(APPEND CMAKE_MODULE_PATH ABSOLUTE_CMAKE_MODULE_PATH)
-list(APPEND CMAKE_PREFIX_PATH ABSOLUTE_CMAKE_PREFIX_PATH)
+list(APPEND CMAKE_MODULE_PATH ${ABSOLUTE_CMAKE_MODULE_PATH})
+list(APPEND CMAKE_PREFIX_PATH ${ABSOLUTE_CMAKE_PREFIX_PATH})
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
