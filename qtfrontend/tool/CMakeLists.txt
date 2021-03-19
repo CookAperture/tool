@@ -33,8 +33,16 @@ set(PROJECT_SOURCES
         adapter/qmlprototypeadapter.cpp
 )
 
-list(APPEND CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
-list(APPEND CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+#--------------configure-here------
+set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
+set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
+set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
+#----------------------------------
+
+list(APPEND CMAKE_MODULE_PATH ABSOLUTE_CMAKE_MODULE_PATH)
+list(APPEND CMAKE_PREFIX_PATH ABSOLUTE_CMAKE_PREFIX_PATH)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
@@ -43,6 +51,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(tool
         ${PROJECT_SOURCES}
     )
+    add_custom_command(
+      TARGET tool POST_BUILD
+      COMMAND ${WINDEPLOY_EXECUTABLE} 
+              ${TARGET_EXECUTABLE}
+              --qmldir ${QML_DIR}
+      VERBATIM)
 else()
     if(ANDROID)
         add_library(tool SHARED ${PROJECT_SOURCES})
@@ -50,9 +64,9 @@ else()
         add_executable(tool ${PROJECT_SOURCES})
         add_custom_command(
           TARGET tool POST_BUILD
-          COMMAND G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe 
-                  I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe
-                  --qmldir I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\
+          COMMAND WINDEPLOY_EXECUTABLE 
+                  TARGET_EXECUTABLE
+                  QML_DIR
           VERBATIM)
     endif()
 endif()
