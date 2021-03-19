@@ -1,16 +1,3 @@
-cmake_minimum_required(VERSION 3.14)
-
-project(tool LANGUAGES CXX)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package(...) calls below.
@@ -24,8 +11,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+cmake_minimum_required(VERSION 3.14)
+
+project(tool LANGUAGES CXX)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -36,21 +33,31 @@ set(PROJECT_SOURCES
         adapter/qmlprototypeadapter.cpp
 )
 
+list(APPEND CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+list(APPEND CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(tool
         ${PROJECT_SOURCES}
     )
 else()
     if(ANDROID)
-        add_library(tool SHARED
-            ${PROJECT_SOURCES}
-        )
-    else()
-        add_executable(tool
-          ${PROJECT_SOURCES}
-        )
+        add_library(tool SHARED ${PROJECT_SOURCES})
+    elseif(WIN32)
+        add_executable(tool ${PROJECT_SOURCES})
+        add_custom_command(
+          TARGET tool POST_BUILD
+          COMMAND G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe 
+                  I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe
+                  --qmldir I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\
+          VERBATIM)
     endif()
 endif()
+
+
 
 target_compile_definitions(tool
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)

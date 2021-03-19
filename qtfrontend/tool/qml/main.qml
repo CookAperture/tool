@@ -49,7 +49,7 @@ ApplicationWindow
         source: "ui/" + qmlAdapter.view + ".qml"
     }
     SideBar{id:sidebar}
-    //fooder: content goes here
+    //footer: content goes here
 }
 
 //style : Component -> pls resesarch
