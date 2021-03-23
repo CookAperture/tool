@@ -34,11 +34,17 @@ set(PROJECT_SOURCES
 )
 
 #--------------configure-here------
-set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
-set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
-set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
-set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
-set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
+#set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+#set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+#set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
+#set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
+#set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
+
+set(ABSOLUTE_CMAKE_MODULE_PATH "C:/Qt/6.1.0/mingw81_64/lib/cmake/Qt6/")
+set(ABSOLUTE_CMAKE_PREFIX_PATH "C:/Qt/6.1.0/mingw81_64/lib/cmake/")
+set(WINDEPLOY_EXECUTABLE "C:/Qt/6.1.0/mingw81_64/bin/windeployqt.exe")
+set(TARGET_EXECUTABLE "D:\\Repos\\tool\\qtfrontend\\build\\tool.exe")
+set(QML_DIR "D:\\Repos\\tool\\qtfrontend\\tool\\qml\\")
 #----------------------------------
 
 list(APPEND CMAKE_MODULE_PATH ${ABSOLUTE_CMAKE_MODULE_PATH})
