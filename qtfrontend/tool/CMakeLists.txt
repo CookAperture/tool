@@ -25,31 +25,30 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
-        main.cpp
-        qml/qml.qrc
-        adapter/qmlmainadapter.h
-        adapter/qmlmainadapter.cpp
-        adapter/qmlprototypeadapter.h
-        adapter/qmlprototypeadapter.cpp
+main.cpp
+qml/qml.qrc
+adapter/qmlmainadapter.h
+adapter/qmlmainadapter.cpp
+adapter/qmlprototypeadapter.h
+adapter/qmlprototypeadapter.cpp
 )
 
 #--------------configure-here------
-#set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
-#set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
-#set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
-#set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
-#set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
+set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+set(BACKEND_INCLUDE_DIR "I:\\Repositories\\tool\\qtbackend\\qtbackend")
+set(BACKEND "I:/Repositories/tool/qtbackend/qtbackend/build/libqtbackend.dll")
+set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
+set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
+set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
 
-set(ABSOLUTE_CMAKE_MODULE_PATH "C:/Qt/6.1.0/mingw81_64/lib/cmake/Qt6/")
-set(ABSOLUTE_CMAKE_PREFIX_PATH "C:/Qt/6.1.0/mingw81_64/lib/cmake/")
-set(WINDEPLOY_EXECUTABLE "C:/Qt/6.1.0/mingw81_64/bin/windeployqt.exe")
-set(TARGET_EXECUTABLE "D:\\Repos\\tool\\qtfrontend\\build\\tool.exe")
-set(QML_DIR "D:\\Repos\\tool\\qtfrontend\\tool\\qml\\")
 #----------------------------------
 
 list(APPEND CMAKE_MODULE_PATH ${ABSOLUTE_CMAKE_MODULE_PATH})
 list(APPEND CMAKE_PREFIX_PATH ${ABSOLUTE_CMAKE_PREFIX_PATH})
 
+include_directories(${BACKEND_INCLUDE_DIR})
+set(LIBRARIES ${BACKEND})
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
@@ -82,7 +81,7 @@ endif()
 target_compile_definitions(tool
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(tool
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick ${LIBRARIES})
 
 # orgamize code here
 source_group("main" FILES main.cpp)
