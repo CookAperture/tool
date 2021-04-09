@@ -15,8 +15,4 @@ Drawer
        text: "Content goes here!"
        anchors.centerIn: parent
    }
-   BusyIndicator
-   {
-       running: true
-   }
 }

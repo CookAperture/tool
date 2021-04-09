@@ -3,9 +3,8 @@
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>ui/prototype.qml</file>
-        <file>ui/Page1Form.ui.qml</file>
-        <file>ui/Page2Form.ui.qml</file>
         <file>BasicToolBar.qml</file>
         <file>SideBar.qml</file>
+        <file>ui/ReadWriteText.ui.qml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
-import QtQuick 6.0
-import QtQuick.Controls 6.0
-import QtQuick.Layouts 6.0
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 Page {
     SwipeView {
@@ -9,8 +9,7 @@ Page {
         currentIndex: 1
         anchors.fill: parent
 
-        Page1Form {}
-        Page2Form {}
+        ReadWriteText {}
     }
 
     PageIndicator {

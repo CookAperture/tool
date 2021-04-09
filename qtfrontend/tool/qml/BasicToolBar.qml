@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.12
 import QtQuick.Window 2.12
 
 Page {
-    anchors.fill: parent
     anchors.margins: 0
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
