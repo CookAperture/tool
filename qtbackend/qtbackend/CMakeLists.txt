@@ -10,8 +10,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #--------------configure-here------
-set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
-set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+#set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+#set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+
+find_path(ABSOLUTE_CMAKE_MODULE_PATH
+  NAMES Qt6Config.cmake qt6-config.cmake
+  PATHS "C:/Qt/6.1.0/mingw81_64/lib/cmake/Qt6" #add additional directories you might suspect your files if not found otherwise
+)
+set(ABSOLUTE_CMAKE_PREFIX_PATH "${ABSOLUTE_CMAKE_MODULE_PATH}/../")
 #----------------------------------
 
 list(APPEND CMAKE_MODULE_PATH ${ABSOLUTE_CMAKE_MODULE_PATH})

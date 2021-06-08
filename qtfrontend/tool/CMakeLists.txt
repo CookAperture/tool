@@ -34,14 +34,25 @@ adapter/qmlprototypeadapter.cpp
 )
 
 #--------------configure-here------
-set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
-set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
-set(BACKEND_INCLUDE_DIR "I:\\Repositories\\tool\\qtbackend\\qtbackend")
-set(BACKEND "I:/Repositories/tool/qtbackend/qtbackend/build/libqtbackend.dll")
-set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
-set(TARGET_EXECUTABLE "I:\\Repositories\\tool\\qtfrontend\\tool\\build\\tool.exe")
-set(QML_DIR "I:\\Repositories\\tool\\qtfrontend\\tool\\qml\\")
+#set(ABSOLUTE_CMAKE_MODULE_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/Qt6/")
+#set(ABSOLUTE_CMAKE_PREFIX_PATH "G:/Software/Qt/6.0.1/mingw81_64/lib/cmake/")
+#set(WINDEPLOY_EXECUTABLE "G:/Software/Qt/6.0.1/mingw81_64/bin/windeployqt.exe")
 
+find_path(ABSOLUTE_CMAKE_MODULE_PATH
+  NAMES Qt6Config.cmake qt6-config.cmake
+  PATHS "C:/Qt/6.1.0/mingw81_64/lib/cmake/Qt6" #add additional directories you might suspect your files if not found otherwise
+)
+set(ABSOLUTE_CMAKE_PREFIX_PATH "${ABSOLUTE_CMAKE_MODULE_PATH}/../")
+
+find_file(WINDEPLOY_EXECUTABLE 
+  NAMES windeployqt.exe
+  PATHS "C:/Qt/6.1.0/mingw81_64/bin/" #add additional directories you might suspect your files if not found otherwise
+)
+
+set(BACKEND_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../qtbackend/qtbackend/")
+set(BACKEND "${CMAKE_CURRENT_SOURCE_DIR}/../../qtbackend/build/libqtbackend.dll")
+set(TARGET_EXECUTABLE "${CMAKE_CURRENT_SOURCE_DIR}/../build/tool.exe")
+set(QML_DIR "${CMAKE_CURRENT_SOURCE_DIR}/qml/")
 #----------------------------------
 
 list(APPEND CMAKE_MODULE_PATH ${ABSOLUTE_CMAKE_MODULE_PATH})
@@ -76,12 +87,10 @@ else()
     endif()
 endif()
 
-
-
 target_compile_definitions(tool
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(tool
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick ${LIBRARIES})
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick ${LIBRARIES}) #${LIBRARIES}
 
 # orgamize code here
 source_group("main" FILES main.cpp)

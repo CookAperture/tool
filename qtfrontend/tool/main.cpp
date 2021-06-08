@@ -6,8 +6,6 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     qmlMainAdapter qmlAdapter{};
 
     QGuiApplication app(argc, argv);
